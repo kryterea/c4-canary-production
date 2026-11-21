@@ -9,3 +9,5 @@ npm test
 ```
 
 There are no dependencies to install.
+
+C4 receipt repeat after the staging transaction scheduling fix. Source and tests are unchanged.
