@@ -49,6 +49,13 @@ export async function requestRetry(
     }
   }
   if (record.importStatus !== 'failed' && record.importStatus !== 'timeout') {
+    audit.record({
+      orderId: record.orderId,
+      step: 'retry',
+      outcome: 'denied_no_retryable_import',
+      actorId: actor.id,
+      at,
+    })
     return {
       allowed: false,
       reason: 'nothing_to_retry',

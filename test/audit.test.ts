@@ -6,6 +6,34 @@ import { requestRetry } from '../src/retry.ts'
 import { completeOrder, coordinator, deps, fixedClock, support } from './helpers.ts'
 
 describe('STORY-007-v6 / STORY-007 / FR-007 audit trail', () => {
+  it('STORY-007-v6 / STORY-007: records denial when a confirmed import has nothing to retry', async () => {
+    const d = deps()
+    const outcome = await requestRetry(
+      {
+        orderId: 'BEA-1001',
+        key: 'ord_stable',
+        importStatus: 'accepted',
+        financeConfirmed: true,
+        acknowledged: true,
+        history: [],
+      },
+      coordinator,
+      d.finance,
+      d.audit,
+      fixedClock,
+    )
+    assert.equal(outcome.allowed, false)
+    assert.deepEqual(d.audit.list('BEA-1001'), [
+      {
+        orderId: 'BEA-1001',
+        step: 'retry',
+        outcome: 'denied_no_retryable_import',
+        actorId: 'coord-1',
+        at: '2026-11-11T09:00:00.000Z',
+      },
+    ])
+  })
+
   it('STORY-007-v6 / STORY-007: shows who did what and when for each intake step', async () => {
     const d = deps()
     await submitOrder(completeOrder(), coordinator, d)
