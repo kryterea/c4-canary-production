@@ -23,3 +23,5 @@ export function validateOrder(order: unknown): ValidationResult {
   if (missing.length > 0) return { ok: false, missing, reason: 'required_fields_missing' }
   return { ok: true }
 }
+
+// Controlled C4 rollback-drill push. Validation behavior is unchanged.
