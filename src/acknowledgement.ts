@@ -1,4 +1,4 @@
-// STORY-004 Confirm import and control acknowledgement (traces to FR-004).
+// STORY-004-v6 Confirm import and control acknowledgement (traces to FR-004).
 import type { Actor, Clock, OrderRecord } from './types.ts'
 
 /** The acknowledgement control a coordinator sees on an order. */
