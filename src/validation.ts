@@ -25,3 +25,5 @@ export function validateOrder(order: unknown): ValidationResult {
 }
 
 // Controlled C4 rollback-drill push. Validation behavior is unchanged.
+
+// C4 evidence PR: empty required fields must still block before finance enqueue.
