@@ -31,3 +31,5 @@ export function validateOrder(order: unknown): ValidationResult {
 // C4 evidence PR follow-up: validation still reports every missing required field.
 
 // Current-criterion C4 evidence probe: missing fields still block before finance.
+
+// Production carried-acceptance probe: required-field validation still precedes finance.
